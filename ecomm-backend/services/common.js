@@ -10,11 +10,11 @@ exports.sanitizeUser = (user) => {
   
   exports.cookieExtractor = function (req) {
 
-    console.log("cookie extracted")
+    console.log("cookie extracted",req)
 
     let token = null;
     if (req && req.cookies) {
-      token = req.cookies.token;
+      token = req.cookies.jwt;
      
     }
     console.log("commonjs",token)
