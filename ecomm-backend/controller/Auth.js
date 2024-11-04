@@ -27,7 +27,7 @@ exports.createUser = async (req, res) => {
             console.log("pass2",token)
             doc.token=token;
             res
-              .cookie('jwt', token, {
+              .cookie('token', token, {
                 expires: new Date(Date.now() + 3600000),
                 httpOnly: true,
               })
@@ -45,7 +45,7 @@ exports.createUser = async (req, res) => {
 exports.loginUser = async (req, res) => {
   console.log("kkkkkkkkkkkkkkkkkkkkkkk",req.user,"iiiiiiiiiiiiiiiiiiiiiiii")
   res
-    .cookie('jwt', req.user.token, {
+    .cookie('token', req.user.token, {
       expires: new Date(Date.now() + 3600000),
       httpOnly: true,
       sameSite:'None'
