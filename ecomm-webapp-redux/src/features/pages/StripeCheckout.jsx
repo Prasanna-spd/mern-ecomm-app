@@ -16,7 +16,7 @@ const StripeCheckout = () => {
       const headers = {
         "Content-Type": "application/json"
       };
-      const response = await fetch("http://localhost:8080/create-checkout-session", {
+      const response = await fetch("https://mern-ecomm-app-9amd.onrender.com/create-checkout-session", {
         method: "POST",
         headers: headers,
         body: JSON.stringify({

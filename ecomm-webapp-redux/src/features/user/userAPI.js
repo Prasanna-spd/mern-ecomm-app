@@ -5,7 +5,7 @@ const token = Cookies.get('token');
 
 export function fetchLoggedInUserOrders() {
     return new Promise(async (resolve) =>{
-      const response = await fetch('http://localhost:8080/orders/own/',{
+      const response = await fetch('https://mern-ecomm-app-9amd.onrender.com/orders/own/',{
         method: 'GET',
         credentials: 'include',
         headers: {
@@ -21,7 +21,7 @@ export function fetchLoggedInUserOrders() {
   export function fetchLoggedInUser() {
     return new Promise(async (resolve, reject) => {
       try {
-        const response = await fetch('http://localhost:8080/users/own',{
+        const response = await fetch('https://mern-ecomm-app-9amd.onrender.com/users/own',{
         method: 'GET',
         credentials: 'include',
         headers: {
@@ -45,7 +45,7 @@ export function fetchLoggedInUserOrders() {
   
   export function updateUser(update) {
     return new Promise(async (resolve) => {
-      const response = await fetch('http://localhost:8080/users/'+update.id, {
+      const response = await fetch('https://mern-ecomm-app-9amd.onrender.com/users/'+update.id, {
         method: 'PUT',
         body: JSON.stringify(update),
         credentials:"include",

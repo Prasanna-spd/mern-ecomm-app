@@ -6,7 +6,7 @@ const token = Cookies.get('token');
 
 export function createUser(userData) {
   return new Promise(async (resolve) => {
-    const response = await fetch('http://localhost:8080/auth/signup', {
+    const response = await fetch('https://mern-ecomm-app-9amd.onrender.com/auth/signup', {
       method: 'POST',
       body: JSON.stringify(userData),
       headers: { 'content-type': 'application/json' },
@@ -20,7 +20,7 @@ export function createUser(userData) {
 // export function loginUser(loginInfo) {
 //   return new Promise(async (resolve, reject) => {
 //     try {
-//       const response = await fetch('http://localhost:8080/auth/login', {
+//       const response = await fetch('https://mern-ecomm-app-9amd.onrender.com/auth/login', {
 //         method: 'POST',
 //         body: JSON.stringify(loginInfo),
 //         headers: { 'content-type': 'application/json' },
@@ -44,7 +44,7 @@ export function createUser(userData) {
 export function loginUser(loginInfo) {
   return new Promise(async (resolve, reject) => {
     try {
-      const response = await fetch('http://localhost:8080/auth/login', {
+      const response = await fetch('https://mern-ecomm-app-9amd.onrender.com/auth/login', {
         method: 'POST',
         body: JSON.stringify(loginInfo),
         headers: { 'content-type': 'application/json' },
@@ -79,7 +79,7 @@ export function loginUser(loginInfo) {
 export function checkAuth() {
   return new Promise(async (resolve, reject) => {
     try {
-      const response = await fetch('http://localhost:8080/auth/check', {
+      const response = await fetch('https://mern-ecomm-app-9amd.onrender.com/auth/check', {
         method: 'GET',
         credentials: 'include',
         headers: {
