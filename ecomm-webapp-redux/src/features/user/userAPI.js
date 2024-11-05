@@ -1,11 +1,7 @@
-import Cookies from 'js-cookie';
 
-const token = Cookies.get('token');
-
-
-export function fetchLoggedInUserOrders() {
+export function fetchLoggedInUserOrders(token) {
     return new Promise(async (resolve) =>{
-      const response = await fetch('https://mern-ecomm-app-9amd.onrender.com/orders/own/',{
+      const response = await fetch('http://localhost:8080/orders/own/',{
         method: 'GET',
         credentials: 'include',
         headers: {
@@ -18,10 +14,10 @@ export function fetchLoggedInUserOrders() {
     );
   }
 
-  export function fetchLoggedInUser() {
+  export function fetchLoggedInUser(token) {
     return new Promise(async (resolve, reject) => {
       try {
-        const response = await fetch('https://mern-ecomm-app-9amd.onrender.com/users/own',{
+        const response = await fetch('http://localhost:8080/users/own',{
         method: 'GET',
         credentials: 'include',
         headers: {
@@ -45,13 +41,13 @@ export function fetchLoggedInUserOrders() {
   
   export function updateUser(update) {
     return new Promise(async (resolve) => {
-      const response = await fetch('https://mern-ecomm-app-9amd.onrender.com/users/'+update.id, {
+      const response = await fetch('http://localhost:8080/users/'+update.id, {
         method: 'PUT',
         body: JSON.stringify(update),
         credentials:"include",
       // headers: {  },
       headers: {'content-type': 'application/json',
-    Authorization: `Bearer ${token}`,
+    Authorization: `Bearer ${update.token}`,
   },
       });
       const data = await response.json();

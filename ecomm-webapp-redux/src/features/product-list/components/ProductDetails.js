@@ -59,7 +59,7 @@ export default function ProductDetail() {
         product: product.id,
         quantity: 1,
       };
-      dispatch(addToCartAsync(newItem));
+      dispatch(addToCartAsync({newItem,token:user}));
       // TODO: it will be based on server response of backend
       toast.success('Item added to Cart');
     } else {
@@ -68,8 +68,8 @@ export default function ProductDetail() {
   };
 
   useEffect(() => {
-    dispatch(fetchProductByIdAsync(params.id));
-  }, [dispatch, params.id]);
+    dispatch(fetchProductByIdAsync({id:params.id,token:user}));
+  }, [dispatch, params.id,user]);
 
   return (
     <div className="bg-white">

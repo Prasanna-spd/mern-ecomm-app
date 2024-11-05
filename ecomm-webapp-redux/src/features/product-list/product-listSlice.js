@@ -18,8 +18,8 @@ const initialState = {
 
 export const fetchProductByIdAsync = createAsyncThunk(
   'product/fetchProductById',
-  async (id) => {
-    const response = await fetchProductById(id);
+  async ({id,token}) => {
+    const response = await fetchProductById(id,token);
     // The value we return becomes the `fulfilled` action payload
     return response.data;
   }
@@ -29,8 +29,8 @@ export const fetchProductByIdAsync = createAsyncThunk(
 
 export const fetchProductsByFiltersAsync = createAsyncThunk(
   'product/fetchProductsByFilters',
-  async ({ filter, sort, pagination,admin }) => {
-    const response = await fetchProductsByFilters(filter, sort, pagination,admin);
+  async ({ filter, sort, pagination,admin,token }) => {
+    const response = await fetchProductsByFilters(filter, sort, pagination,admin,token);
     console.log(response,"frontend part product")
     return response.data;
   }
@@ -38,16 +38,16 @@ export const fetchProductsByFiltersAsync = createAsyncThunk(
 
 export const fetchBrandsAsync = createAsyncThunk(
   'product/fetchBrands',
-  async () => {
-    const response = await fetchBrands();
+  async ({token}) => {
+    const response = await fetchBrands(token);
     // The value we return becomes the `fulfilled` action payload
     return response.data;
   }
 );
 export const fetchCategoriesAsync = createAsyncThunk(
   'product/fetchCategories',
-  async () => {
-    const response = await fetchCategories();
+  async ({token}) => {
+    const response = await fetchCategories(token);
     // The value we return becomes the `fulfilled` action payload
     return response.data;
   }

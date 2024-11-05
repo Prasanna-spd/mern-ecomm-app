@@ -190,8 +190,8 @@ server.post("/create-checkout-session", async (req, res) => {
       line_items: lineItems,
       mode: "payment",
       customer: customer.id, // Use the created customer
-      success_url: `http://localhost:3000/order-success/${currentOrder.id}`,
-      cancel_url: "http://localhost:3000",
+      success_url: `http://localhost:8080/order-success/${currentOrder.id}`,
+      cancel_url: "http://localhost:8080",
     });
 
     res.json({ id: session.id });

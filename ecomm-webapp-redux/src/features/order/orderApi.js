@@ -1,13 +1,7 @@
-import Cookies from 'js-cookie';
-
-const token = Cookies.get('token');
-
-
-
-export function createOrder(order) {
+export function createOrder(order,token) {
   console.log(order,"from ordrapi")
   return new Promise(async (resolve) => {
-    const response = await fetch('https://mern-ecomm-app-9amd.onrender.com/orders/', {
+    const response = await fetch('http://localhost:8080/orders/', {
       method: 'POST',
       body: JSON.stringify(order),
       credentials:"include",
@@ -25,13 +19,13 @@ export function createOrder(order) {
 
 export function updateOrder(order) {
   return new Promise(async (resolve) => {
-    const response = await fetch('https://mern-ecomm-app-9amd.onrender.com/orders/'+order.id, {
+    const response = await fetch('http://localhost:8080/orders/'+order.id, {
       method: 'PUT',
       body: JSON.stringify(order),
       credentials:"include",
       // headers: {  },
       headers: {'content-type': 'application/json',
-    Authorization: `Bearer ${token}`,
+    // Authorization: `Bearer ${token}`,
   },
     });
     const data = await response.json();
@@ -52,7 +46,7 @@ export function fetchAllOrders(sort, pagination) {
   return new Promise(async (resolve) => {
     //TODO: we will not hard-code server URL here
     const response = await fetch(
-      'https://mern-ecomm-app-9amd.onrender.com/orders?' + queryString
+      'http://localhost:8080/orders?' + queryString
     );
     const data = await response.json();
     const totalOrders = await response.headers.get('X-Total-Count');

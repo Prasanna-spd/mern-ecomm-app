@@ -1,13 +1,9 @@
-import Cookies from 'js-cookie';
-
-const token = Cookies.get('token');
-
 
 export function addToCart(item, token) {
   return new Promise(async (resolve, reject) => {
     console.log(token,"token")
     try {
-      const response = await fetch('https://mern-ecomm-app-9amd.onrender.com/cart', {
+      const response = await fetch('http://localhost:8080/cart', {
         method: 'POST',
         body: JSON.stringify(item),
         credentials: 'include',
@@ -31,10 +27,10 @@ export function addToCart(item, token) {
   });
 }
 
-export function fetchItemsByUserId(userId) {
+export function fetchItemsByUserId(token) {
   return new Promise(async (resolve) => {
     //TODO: we will not hard-code server URL here
-    const response = await fetch('https://mern-ecomm-app-9amd.onrender.com/cart',{
+    const response = await fetch('http://localhost:8080/cart',{
         method: 'GET',
         credentials: 'include',
         headers: {
@@ -48,12 +44,12 @@ export function fetchItemsByUserId(userId) {
 
 export function updateCart(update) {
   return new Promise(async (resolve) => {
-    const response = await fetch('https://mern-ecomm-app-9amd.onrender.com/cart/' + update.id, {
+    const response = await fetch('http://localhost:8080/cart/' + update.id, {
       method: 'PUT',
       body: JSON.stringify(update),
       credentials: 'include',
       headers: { 'content-type': 'application/json',
-      Authorization: `Bearer ${token}`,
+      // Authorization: `Bearer ${token}`,
        },
     });
     const data = await response.json();
@@ -62,9 +58,9 @@ export function updateCart(update) {
   });
 }
 
-export function deleteItemFromCart(itemId) {
+export function deleteItemFromCart(itemId,token) {
   return new Promise(async (resolve) => {
-    const response = await fetch('https://mern-ecomm-app-9amd.onrender.com/cart/' + itemId, {
+    const response = await fetch('http://localhost:8080/cart/' + itemId, {
       method: 'DELETE',
       credentials: 'include',
       headers: { 'content-type': 'application/json',
@@ -77,13 +73,13 @@ export function deleteItemFromCart(itemId) {
   });
 }
 
-export function resetCart(userId) {
+export function resetCart(token) {
   // get all items of user's cart - and then delete each
   return new Promise(async (resolve) => {
     const response = await fetchItemsByUserId();
     const items = response.data;
     for (let item of items) {
-      await deleteItemFromCart(item.id);
+      await deleteItemFromCart(item.id,token);
     }
     resolve({status:'success'})
   });

@@ -12,12 +12,14 @@ import { Navigate } from 'react-router-dom';
 import { discountedPrice } from '../../app/constants';
 import { Grid } from 'react-loader-spinner';
 import Modal from '../common/Modal';
+import { selectLoggedInUser } from '../auth/authSlice';
 
 export default function Cart() {
   const dispatch = useDispatch();
 
   const items = useSelector(selectItems);
   const status = useSelector(selectCartStatus);
+  const user = useSelector(selectLoggedInUser);
   const cartLoaded = useSelector(selectCartLoaded)
   const [openModal, setOpenModal] = useState(null);
 
@@ -28,11 +30,11 @@ export default function Cart() {
   const totalItems = items.reduce((total, item) => item.quantity + total, 0);
 
   const handleQuantity = (e, item) => {
-    dispatch(updateCartAsync({id:item.id, quantity: +e.target.value }));
+    dispatch(updateCartAsync({id:item.id, quantity: +e.target.value ,token:user}));
   };
 
   const handleRemove = (e, id) => {
-    dispatch(deleteItemFromCartAsync(id));
+    dispatch(deleteItemFromCartAsync({id,token:user}));
   };
 
   return (

@@ -23,6 +23,7 @@ function Checkout() {
     formState: { errors },
   } = useForm();
 
+  const token=useSelector(selectLoggedInUser)
   const user = useSelector(selectUserInfo);
   const items = useSelector(selectItems);
   const currentOrder = useSelector(selectCurrentOrder);
@@ -65,7 +66,7 @@ function Checkout() {
         selectedAddress,
         status: 'pending', // other status can be delivered, received.
       };
-      dispatch(createOrderAsync(order));
+      dispatch(createOrderAsync({order,token}));
       // need to redirect from here to a new page of order success.
     } else {
       // TODO : we can use proper messaging popup here
@@ -106,6 +107,7 @@ function Checkout() {
                   updateUserAsync({
                     ...user,
                     addresses: [...user.addresses, data],
+                    token
                   })
                 );
                 reset();

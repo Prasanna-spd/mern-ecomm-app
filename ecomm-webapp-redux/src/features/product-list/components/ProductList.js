@@ -27,6 +27,7 @@ import {
 } from "@heroicons/react/20/solid";
 import { ITEMS_PER_PAGE, discountedPrice } from '../../../app/constants';
 import Pagination from '../../common/pagination';
+import { selectLoggedInUser } from "../../auth/authSlice.js";
 
 const sortOptions = [
   { name: "Best Rating", sort: "-rating", current: false },
@@ -49,6 +50,8 @@ export default function ProductList() {
   const [filter, setFilter] = useState({});
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
   const [page, setPage] = useState(1);
+
+  const user = useSelector(selectLoggedInUser);
 
   const filters = [
     {
@@ -94,15 +97,15 @@ export default function ProductList() {
   };
   useEffect(() => {
     const pagination = { _page: page, _per_page: ITEMS_PER_PAGE };
-    dispatch(fetchProductsByFiltersAsync({ filter, sort, pagination }));
-  }, [dispatch, filter, sort, page]);
+    dispatch(fetchProductsByFiltersAsync({ filter, sort, pagination,token:user }));
+  }, [dispatch, filter, sort, page,user]);
 
   useEffect(() => {
     setPage(1);
   }, [totalItems, sort]);
   useEffect(() => {
-    dispatch(fetchBrandsAsync());
-    dispatch(fetchCategoriesAsync());
+    dispatch(fetchBrandsAsync({token:user}));
+    dispatch(fetchCategoriesAsync({token:user}));
   }, []);
   return (
     <div className="bg-white">
@@ -118,6 +121,7 @@ export default function ProductList() {
           <div className="flex items-baseline justify-between border-b border-gray-200 pb-6 pt-24">
             <h1 className="text-4xl font-bold tracking-tight text-gray-900">
               All Products
+              {console.log("this is the loogeninuser toekn",user)}
             </h1>
 
             <div className="flex items-center">

@@ -56,21 +56,18 @@ exports.loginUser = async (req, res) => {
 
 
 exports.logout = async (req, res) => {
+  console.log("singout called")
   res
-  .cookie('jwt', '', { // Set the jwt cookie to an empty string
-    expires: new Date(Date.now()), // Expire the cookie
-    httpOnly: true, // Prevent JavaScript from accessing the cookie
-    path: '/', // Specify the path (default is '/')
-  })
-  .cookie('token', '', { // Set the token cookie to an empty string
-    expires: new Date(Date.now()), // Expire the cookie
-    httpOnly: true, // Prevent JavaScript from accessing the cookie
-    path: '/', // Specify the path (default is '/')
+  .cookie('jwt', '', { 
+    expires: new Date(Date.now()), 
+    httpOnly: true, 
+    path: '/', 
   })
   .sendStatus(200); // Send a 200 OK response
 };
 
 exports.checkAuth = async (req, res) => {
+  console.log("first this is from auth backend kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk",req,"llllllllllllllllll")
     if(req.user){
       res.json(req.user);
     } else{

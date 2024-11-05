@@ -7,15 +7,17 @@ import {
   selectUserOrders,
 } from "../UserSlice";
 import { discountedPrice } from '../../../app/constants';
+import { selectLoggedInUser } from "../../auth/authSlice";
 
 export default function UserOrders() {
   const dispatch = useDispatch();
   
+  const user=useSelector(selectLoggedInUser)
   const orders = useSelector(selectUserOrders);
   const status = useSelector(selectUserInfoStatus);
 
   useEffect(() => {
-    dispatch(fetchLoggedInUserOrderAsync());
+    dispatch(fetchLoggedInUserOrderAsync({token:user}));
   }, [dispatch]);
 
   return (

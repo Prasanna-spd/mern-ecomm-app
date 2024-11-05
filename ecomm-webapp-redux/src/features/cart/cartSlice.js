@@ -9,8 +9,8 @@ const initialState = {
 
 export const addToCartAsync = createAsyncThunk(
   'cart/addToCart',
-  async (item) => {
-    const response = await addToCart(item);
+  async ({newItem,token}) => {
+    const response = await addToCart(newItem,token);
     console.log(response,"this is from the cart")
     // The value we return becomes the `fulfilled` action payload
     return response.data;
@@ -19,8 +19,8 @@ export const addToCartAsync = createAsyncThunk(
 
 export const fetchItemsByUserIdAsync = createAsyncThunk(
   'cart/fetchItemsByUserId',
-  async () => {
-    const response = await fetchItemsByUserId();
+  async ({token}) => {
+    const response = await fetchItemsByUserId(token);
     // The value we return becomes the `fulfilled` action payload
     return response.data;
   }
@@ -37,8 +37,8 @@ export const updateCartAsync = createAsyncThunk(
 
 export const deleteItemFromCartAsync = createAsyncThunk(
   'cart/deleteItemFromCart',
-  async (itemId) => {
-    const response = await deleteItemFromCart(itemId);
+  async ({id,token}) => {
+    const response = await deleteItemFromCart(id,token);
     // The value we return becomes the `fulfilled` action payload
     return response.data;
   }
@@ -46,8 +46,8 @@ export const deleteItemFromCartAsync = createAsyncThunk(
 
 export const resetCartAsync = createAsyncThunk(
   'cart/resetCart',
-  async () => {
-    const response = await resetCart();
+  async ({token}) => {
+    const response = await resetCart(token);
     // The value we return becomes the `fulfilled` action payload
     return response.data;
   }

@@ -1,10 +1,10 @@
 // A mock function to mimic making an async request for data
-import Cookies from 'js-cookie';
 
-const token = Cookies.get('token');
+
+// const token = Cookies.get('jwt');
 export function createProduct(product) {
   return new Promise(async (resolve) => {
-    const response = await fetch('https://mern-ecomm-app-9amd.onrender.com/products', {
+    const response = await fetch('http://localhost:8080/products', {
       method: 'POST',
       body: JSON.stringify(product),
       headers: { 'content-type': 'application/json' },
@@ -18,12 +18,12 @@ export function createProduct(product) {
 export function updateProduct(update) {
   return new Promise(async (resolve) => {
     const response = await fetch(
-      'https://mern-ecomm-app-9amd.onrender.com/products/' + update.id,
+      'http://localhost:8080/products/' + update.id,
       {
         method: 'PUT',
         body: JSON.stringify(update),
         headers: { 'content-type': 'application/json' ,
-        Authorization: `Bearer ${token}`
+        // Authorization: `Bearer ${token}`
         },
         credentials: 'include'
       }
@@ -34,12 +34,15 @@ export function updateProduct(update) {
   });
 }
 
-export function fetchProductById(id) {
+export function fetchProductById(id,token) {
   return new Promise(async (resolve) =>{
     //TODO: we will not hard-code server URL here
-    const response = await fetch('https://mern-ecomm-app-9amd.onrender.com/products/'+id,{
+    const response = await fetch('http://localhost:8080/products/'+id,{
       method: 'GET',
-        credentials: 'include'
+        credentials: 'include',
+        headers: {
+    Authorization: `Bearer ${token}`,
+  },
     }) 
     const data = await response.json()
     resolve({data})
@@ -47,7 +50,7 @@ export function fetchProductById(id) {
   );
 }
 
-export function fetchProductsByFilters(filter,sort,pagination,admin) {
+export function fetchProductsByFilters(filter,sort,pagination,admin,token) {
   // filter = {"category":["smartphone","laptops"]}
   // sort = {_sort:"price",_order="desc"}
 // pagination = {_page:1,_limit=10}
@@ -71,12 +74,15 @@ export function fetchProductsByFilters(filter,sort,pagination,admin) {
   for(let key in pagination){
     queryString += `${key}=${pagination[key]}&`
   }
-
+  console.log(token,"this is from productlist api")
   return new Promise(async (resolve) =>{
     //TODO: we will not hard-code server URL here
-    const response = await fetch('https://mern-ecomm-app-9amd.onrender.com/products?'+queryString,{
+    const response = await fetch('http://localhost:8080/products?'+queryString,{
       method: 'GET',
-        credentials: 'include'
+        credentials: 'include',
+        headers: {
+    Authorization: `Bearer ${token}`,
+  },
     }) 
     const data = await response.json()
     console.log(data,"product-listapi response")
@@ -86,12 +92,16 @@ export function fetchProductsByFilters(filter,sort,pagination,admin) {
   );
 }
 
-export function fetchCategories() {
+export function fetchCategories(token) {
+  
   return new Promise(async (resolve) =>{
-    const response = await fetch('https://mern-ecomm-app-9amd.onrender.com/categories',
+    const response = await fetch('http://localhost:8080/categories',
       {
         method: 'GET',
-        credentials: 'include'
+        credentials: 'include',
+        headers: {
+    Authorization: `Bearer ${token}`,
+  },
       }
     ) 
     const data = await response.json()
@@ -100,11 +110,14 @@ export function fetchCategories() {
   );
 }
 
-export function fetchBrands() {
+export function fetchBrands(token) {
   return new Promise(async (resolve) =>{
-    const response = await fetch('https://mern-ecomm-app-9amd.onrender.com/brands',{
+    const response = await fetch('http://localhost:8080/brands',{
       method: 'GET',
-        credentials: 'include'
+        credentials: 'include',
+        headers: {
+    Authorization: `Bearer ${token}`,
+  },
     }) 
     const data = await response.json()
     resolve({data})

@@ -1,15 +1,15 @@
-import Cookies from 'js-cookie';
 
-const token = Cookies.get('token');
 
 
 
 export function createUser(userData) {
   return new Promise(async (resolve) => {
-    const response = await fetch('https://mern-ecomm-app-9amd.onrender.com/auth/signup', {
+    const response = await fetch('http://localhost:8080/auth/signup', {
       method: 'POST',
       body: JSON.stringify(userData),
-      headers: { 'content-type': 'application/json' },
+      headers: {'content-type': 'application/json',
+        Authorization: `Bearer ${userData.token}`,
+      },
     });
     const data = await response.json();
     // TODO: on server it will only return some info of user (not password)
@@ -20,7 +20,7 @@ export function createUser(userData) {
 // export function loginUser(loginInfo) {
 //   return new Promise(async (resolve, reject) => {
 //     try {
-//       const response = await fetch('https://mern-ecomm-app-9amd.onrender.com/auth/login', {
+//       const response = await fetch('http://localhost:8080/auth/login', {
 //         method: 'POST',
 //         body: JSON.stringify(loginInfo),
 //         headers: { 'content-type': 'application/json' },
@@ -44,7 +44,7 @@ export function createUser(userData) {
 export function loginUser(loginInfo) {
   return new Promise(async (resolve, reject) => {
     try {
-      const response = await fetch('https://mern-ecomm-app-9amd.onrender.com/auth/login', {
+      const response = await fetch('http://localhost:8080/auth/login', {
         method: 'POST',
         body: JSON.stringify(loginInfo),
         headers: { 'content-type': 'application/json' },
@@ -76,10 +76,10 @@ export function loginUser(loginInfo) {
 
 
 
-export function checkAuth() {
+export function checkAuth(token) {
   return new Promise(async (resolve, reject) => {
     try {
-      const response = await fetch('https://mern-ecomm-app-9amd.onrender.com/auth/check', {
+      const response = await fetch('http://localhost:8080/auth/check', {
         method: 'GET',
         credentials: 'include',
         headers: {
@@ -106,15 +106,25 @@ export function checkAuth() {
 }
 
 
-export function signOut(userId) {
+export function signOut() {
   return new Promise(async (resolve, reject) => {
     try {
-      const response = await fetch('/auth/logout');
+      const response = await fetch('http://localhost:8080/auth/logout', {
+        method: 'GET',
+        credentials: 'include',
+  //       headers: {
+  //   // Authorization: `Bearer ${token}`,
+  // },
+    });
+      // console.log(response,"thisis from signout",Cookies.get('token'));
       if (response.ok) {
-        resolve({ data:'success' });
+        // Remove the token cookie on successful logout
+        // console.log(response,"thisis from signout",Cookies.get('token'))
+        // Cookies.remove('token'); // Clears the cookie named 'token'
+        resolve({ data: 'success' });
       } else {
         const error = await response.text();
-        reject(error);
+        reject(new Error(error));
       }
     } catch (error) {
       console.log(error)

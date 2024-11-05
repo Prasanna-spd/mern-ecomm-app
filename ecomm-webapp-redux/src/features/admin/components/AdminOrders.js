@@ -14,6 +14,7 @@ import {
   ArrowDownIcon,
 } from '@heroicons/react/24/outline';
 import Pagination from '../../common/pagination';
+import { selectLoggedInUser } from '../../auth/authSlice';
 
 function AdminOrders() {
   const [page, setPage] = useState(1);
@@ -22,6 +23,7 @@ function AdminOrders() {
   const totalOrders = useSelector(selectTotalOrders);
   const [editableOrderId, setEditableOrderId] = useState(-1);
   const [sort, setSort] = useState({});
+  const token=useSelector(selectLoggedInUser)
 
   const handleEdit = (order) => {
     setEditableOrderId(order.id);
@@ -32,7 +34,7 @@ function AdminOrders() {
 
   const handleUpdate = (e, order) => {
     const updatedOrder = { ...order, status: e.target.value };
-    dispatch(updateOrderAsync(updatedOrder));
+    dispatch(updateOrderAsync({updatedOrder,token}));
     setEditableOrderId(-1);
   };
 
