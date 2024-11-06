@@ -1,7 +1,3 @@
-
-
-
-
 export function createUser(userData) {
   return new Promise(async (resolve) => {
     const response = await fetch('http://localhost:8080/auth/signup', {
@@ -96,7 +92,7 @@ export function checkAuth(token) {
         reject(error);
       }
     } catch (error) {
-      console.log("this is the checkauth error ",error);
+      console.log("this is the checkauth actual error ",error);
 
       reject( error );
     }

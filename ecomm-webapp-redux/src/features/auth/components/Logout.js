@@ -7,10 +7,11 @@ import { Navigate } from "react-router-dom";
 function Logout() {
     const dispatch = useDispatch();
     const user = useSelector(selectLoggedInUser)
-
-    useEffect(()=>{
-        dispatch(signOutAsync())
-    },[dispatch])
+    useEffect(() => {
+        if (user) {
+            dispatch(signOutAsync());
+        }
+    }, [dispatch, user]);
 
     // but useEffect runs after render, so we have to delay navigate part
     return ( 

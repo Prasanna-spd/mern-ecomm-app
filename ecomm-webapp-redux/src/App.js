@@ -178,7 +178,7 @@ function App() {
        // we can get req.user by token on backend so no need to give in front-end
       dispatch(fetchLoggedInUserAsync({token:user}));
     }
-  }, [dispatch, user]);
+  }, [dispatch,user]);
 
   return (
     <>
