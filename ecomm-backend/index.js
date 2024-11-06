@@ -190,8 +190,8 @@ server.post("/create-checkout-session", async (req, res) => {
       line_items: lineItems,
       mode: "payment",
       customer: customer.id, // Use the created customer
-      success_url: `http://localhost:8080/order-success/${currentOrder.id}`,
-      cancel_url: "http://localhost:8080",
+      success_url: `https://mern-ecomm-app-9amd.onrender.com/order-success/${currentOrder.id}`,
+      cancel_url: "https://mern-ecomm-app-9amd.onrender.com",
     });
 
     res.json({ id: session.id });

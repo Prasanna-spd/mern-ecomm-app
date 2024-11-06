@@ -67,7 +67,7 @@ exports.logout = async (req, res) => {
 };
 
 exports.checkAuth = async (req, res) => {
-  console.log("first this is from auth backend kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk",req,"llllllllllllllllll")
+  // console.log("first this is from auth backend kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk",req,"llllllllllllllllll")
     if(req.user){
       res.json(req.user);
     } else{

@@ -3,7 +3,7 @@ export function addToCart(item, token) {
   return new Promise(async (resolve, reject) => {
     console.log(token,"token")
     try {
-      const response = await fetch('http://mern-ecomm-app-9amd.onrender.com/cart', {
+      const response = await fetch('https://mern-ecomm-app-9amd.onrender.com/cart', {
         method: 'POST',
         body: JSON.stringify(item),
         credentials: 'include',
@@ -30,7 +30,7 @@ export function addToCart(item, token) {
 export function fetchItemsByUserId(token) {
   return new Promise(async (resolve) => {
     //TODO: we will not hard-code server URL here
-    const response = await fetch('http://mern-ecomm-app-9amd.onrender.com/cart',{
+    const response = await fetch('https://mern-ecomm-app-9amd.onrender.com/cart',{
         method: 'GET',
         credentials: 'include',
         headers: {
@@ -44,7 +44,7 @@ export function fetchItemsByUserId(token) {
 
 export function updateCart(update) {
   return new Promise(async (resolve) => {
-    const response = await fetch('http://mern-ecomm-app-9amd.onrender.com/cart/' + update.id, {
+    const response = await fetch('https://mern-ecomm-app-9amd.onrender.com/cart/' + update.id, {
       method: 'PUT',
       body: JSON.stringify(update),
       credentials: 'include',
@@ -60,7 +60,7 @@ export function updateCart(update) {
 
 export function deleteItemFromCart(itemId,token) {
   return new Promise(async (resolve) => {
-    const response = await fetch('http://mern-ecomm-app-9amd.onrender.com/cart/' + itemId, {
+    const response = await fetch('https://mern-ecomm-app-9amd.onrender.com/cart/' + itemId, {
       method: 'DELETE',
       credentials: 'include',
       headers: { 'content-type': 'application/json',

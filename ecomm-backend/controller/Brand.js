@@ -1,7 +1,7 @@
 const { Brand } = require('../model/Brand');
 
 exports.fetchBrands = async (req, res) => {
-  console.log("first this is from auth backend kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk",req,"llllllllllllllllll")
+  // console.log("first this is from auth backend kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk",req,"llllllllllllllllll")
   try {
     const brands = await Brand.find({}).exec();
     res.status(200).json(brands);

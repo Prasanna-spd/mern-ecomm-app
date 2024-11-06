@@ -1,6 +1,6 @@
 export function createUser(userData) {
   return new Promise(async (resolve) => {
-    const response = await fetch('http://mern-ecomm-app-9amd.onrender.com/auth/signup', {
+    const response = await fetch('https://mern-ecomm-app-9amd.onrender.com/auth/signup', {
       method: 'POST',
       body: JSON.stringify(userData),
       headers: {'content-type': 'application/json',
@@ -16,7 +16,7 @@ export function createUser(userData) {
 // export function loginUser(loginInfo) {
 //   return new Promise(async (resolve, reject) => {
 //     try {
-//       const response = await fetch('http://mern-ecomm-app-9amd.onrender.com/auth/login', {
+//       const response = await fetch('https://mern-ecomm-app-9amd.onrender.com/auth/login', {
 //         method: 'POST',
 //         body: JSON.stringify(loginInfo),
 //         headers: { 'content-type': 'application/json' },
@@ -40,7 +40,7 @@ export function createUser(userData) {
 export function loginUser(loginInfo) {
   return new Promise(async (resolve, reject) => {
     try {
-      const response = await fetch('http://mern-ecomm-app-9amd.onrender.com/auth/login', {
+      const response = await fetch('https://mern-ecomm-app-9amd.onrender.com/auth/login', {
         method: 'POST',
         body: JSON.stringify(loginInfo),
         headers: { 'content-type': 'application/json' },
@@ -75,7 +75,7 @@ export function loginUser(loginInfo) {
 export function checkAuth(token) {
   return new Promise(async (resolve, reject) => {
     try {
-      const response = await fetch('http://mern-ecomm-app-9amd.onrender.com/auth/check', {
+      const response = await fetch('https://mern-ecomm-app-9amd.onrender.com/auth/check', {
         method: 'GET',
         credentials: 'include',
         headers: {
@@ -105,7 +105,7 @@ export function checkAuth(token) {
 export function signOut() {
   return new Promise(async (resolve, reject) => {
     try {
-      const response = await fetch('http://mern-ecomm-app-9amd.onrender.com/auth/logout', {
+      const response = await fetch('https://mern-ecomm-app-9amd.onrender.com/auth/logout', {
         method: 'GET',
         credentials: 'include',
   //       headers: {

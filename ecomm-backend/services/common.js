@@ -1,7 +1,7 @@
 const passport = require('passport');
 
 exports.isAuth = (req, res, done) => {
-  console.log("first this is from auth backend kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk",req,"llllllllllllllllll")
+  // console.log("first this is from auth backend kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk",req,"llllllllllllllllll")
     return passport.authenticate('jwt');
 };
 
@@ -12,11 +12,11 @@ exports.sanitizeUser = (user) => {
   
   exports.cookieExtractor = function (req) {
 
-    console.log("cookie extracted")
+    console.log("cookie extracted",req.cookies)
 
     let token = null;
-    if (req&&req.user.token ) {
-      token = req.user.token;
+    if (req&&req.cookies.jwt) {
+      token = req.cookies.jwt;
     }
     else if(req && req.headers && req.headers.authorization)
     {
